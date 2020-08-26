@@ -2,7 +2,6 @@
 layout: page
 title: file
 ---
-<script src="../../javascripts/asciinema-player.js"></script>
 
 file
 ======
@@ -11,7 +10,7 @@ The default option that requires **no installation** would be to use the `file` 
 For our code example we will work with 6285633006_R03C01_Red.idat file from the
 [General Example Files](./Example_data_files.md).
 
-<asciinema-player src="./mime_supplementary_files/file_screencast.cast" speed="2" theme="asciinema" font-size="medium" ></asciinema-player>
+<asciinema-player src="../mime_supplementary_files/file_screencast.cast" speed="2" theme="asciinema" font-size="medium" ></asciinema-player>
 
 === "Usage"
 
