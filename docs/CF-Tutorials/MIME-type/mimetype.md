@@ -6,7 +6,9 @@ title: mimetype
 mimetype
 =========
 
-Another option is using [`mimetype` utility](http://manpages.ubuntu.com/manpages/trusty/man1/mimetype.1p.html). This closely follows the `file` command but uses MIME types instead of descriptions.
+The [`mimetype` utility](http://manpages.ubuntu.com/manpages/trusty/man1/mimetype.1p.html) closely follows the `file` command but uses MIME types instead of descriptions. It uses the shared MIME-info database and allows for options to add custom MIME types.
+
+<asciinema-player src="../mime_supplementary_files/mimetype_screencast.cast" speed="2" theme="tango" font-size="medium" cols="60" rows="15" poster="data:text/plain,\x1b[1;37mTerminal Vidlet for mimetype"></asciinema-player>
 
 === "Installation"
 
@@ -20,11 +22,16 @@ Another option is using [`mimetype` utility](http://manpages.ubuntu.com/manpages
     mimetype <name of the file>
     ```
 
-=== "Example output"
+=== "Input"
 
     ```
-    mimetype 9969477031_R02C01_Red.idat
-    9969477031_R02C01_Red.idat: application/octet-stream
+    mimetype 6285633006_R03C01_Red.idat
+    ```
+
+=== "Expected Output"
+
+    ```
+    6285633006_R03C01_Red.idat: application/octet-stream
     ```
 
 There are multiple options to customize the output. The `--describe` or `-d` option returns the file description instead of MIME type. The `-D` or `--debug` option prints the logic behind choosing the MIME type for the file.
@@ -35,22 +42,26 @@ There are multiple options to customize the output. The `--describe` or `-d` opt
     mimetype -D <name of the file>
     ```
 
-=== "Example output"
+=== "Input"
 
     ```
-    mimetype -D 9969477031_R02C01_Red.idat
+    mimetype -D 6285633006_R03C01_Red.idat
+    ```
 
+=== "Expected Output"
+
+    ```
     > Data dirs are: /home/ubuntu/.local/share, /usr/local/share, /usr/share, /var/lib/snapd/desktop
     > Checking inode type
-    > Checking globs for basename '9969477031_R02C01_Red.idat'
+    > Checking globs for basename '6285633006_R03C01_Red.idat'
     > Checking for extension '.idat'
-    > Checking globs for basename '9969477031_r02c01_red.idat'
+    > Checking globs for basename '6285633006_R03C01_Red.idat'
     > Checking for extension '.idat'
     > Value "^@" at offset 36 matches at /usr/share/mime/magic line 770
     > Failed nested rules
     > File exists, trying default method
     > First 10 bytes of the file contain control chars
-    9969477031_R02C01_Red.idat: application/octet-stream
+    6285633006_R03C01_Red.idat: application/octet-stream
     ```
 
 `mimetype` allows for addition of custom MIME types.
@@ -72,6 +83,8 @@ We can add custom MIME types by creating an xml file `illumina-idat.xml` using a
 </mime-info>
 ```
 
+Three lines in the above xml code require editing for every new custom MIME type created: The `mime-type type=` sets the custom MIME type, the `comment` explains the MIME type and the `glob pattern` indicates the search pattern to be associated with the chosen MIME type.
+
 !!! note "globs"
     The `glob` module finds all the pathnames matching a specified pattern according to the rules set by the Unix shell. For MIME type, the file extension acts as the pattern for the search across the filesystem.
 
@@ -87,10 +100,17 @@ sudo update-mime-database /usr/share/mime
 
 Rerunning the code now results in the updated MIME type.
 
-```
-mimetype 9969477031_R02C01_Red.idat
-9969477031_R02C01_Red.idat: application/vnd.binary
-```
+=== "Input"
+
+    ```
+    mimetype 6285633006_R03C01_Red.idat
+    ```
+
+=== "Expected Output"
+
+    ```
+    6285633006_R03C01_Red.idat: application/vnd.binary
+    ```
 
 !!! note "Revert to default"
     If you decide to use the default MIME type instead of the custom association, you can delete the `.xml` file and update the mime-database.
