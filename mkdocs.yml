@@ -18,7 +18,6 @@ plugins:
   - awesome-pages
   - git-revision-date-localized
   - htmlproofer
-
 markdown_extensions:
 - admonition
 - pymdownx.details
