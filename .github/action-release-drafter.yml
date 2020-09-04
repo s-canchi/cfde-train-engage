@@ -19,6 +19,6 @@ include-labels:
    - Dec-2021
 
 template: |
-  ## What’s Changed
+  ## What's New
 
   $CHANGES
