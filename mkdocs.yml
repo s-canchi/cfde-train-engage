@@ -54,7 +54,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/nih-cfde/training-and-engagement/tree/stable
 extra_css:
-  - stylesheets/extra.css
+  #- stylesheets/extra.css
   - stylesheets/asciinema-player.css
   - stylesheets/overrides.min.css
 extra_javascript:
